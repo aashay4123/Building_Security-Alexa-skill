@@ -55,7 +55,7 @@ const postRequest = (data) => {
   const url = "https://httpbin.org/post";
   return new Promise((resolve, reject) => {
     axios
-      .get(url,data)
+      .post(url,data)
       .then((res) => res.data)
       .then((res) => {
         resolve(res);
