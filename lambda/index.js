@@ -166,10 +166,9 @@ const SmartHomeIntentHandler = {
       };
       const response = await getQuote();
       speakOutput = `incomplete response ${response}`;
-      if (response) {
+      if (response.length() > 1) {
         speakOutput = `Done ${response}`;
       }
-      speakOutput = `incomplete response ${response}`;
     }
 
     return handlerInput.responseBuilder
