@@ -52,10 +52,10 @@ const getQuote = () => {
 };
 
 const postRequest = (data) => {
-  const url = "https://httpbin.org/get";
+  const url = "http://192.168.169.134:1880/api";
   return new Promise((resolve, reject) => {
     axios
-      .get(url)
+      .post(url,data)
       .then((res) => res.data)
       .then((res) => {
         resolve(res);
