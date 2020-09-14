@@ -165,6 +165,8 @@ const SmartHomeIntentHandler = {
         location:location,
         equipment:equipment,
       };
+      attributes.outputData = outputData;
+       handlerInput.attributesManager.setSessionAttributes(attributes);
       const response = await postRequest(outputData);
       speakOutput = `incomplete response ${response}`;
       if (response) {
