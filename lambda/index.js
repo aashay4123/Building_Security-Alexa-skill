@@ -51,6 +51,21 @@ const getQuote = () => {
   });
 };
 
+const postRequest = (data) => {
+  const url = "https://httpbin.org/post";
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, data)
+      .then((res) => res.data)
+      .then((res) => {
+        resolve(res.form.equipment);
+      })
+      .catch((err) => {
+        reject("", err);
+      });
+  });
+};
+
 const HelloIntentHandler = {
   canHandle(handlerInput) {
     return (
@@ -139,15 +154,21 @@ const SmartHomeIntentHandler = {
   },
   async handle(handlerInput) {
     let speakOutput = "";
-    const action =
-      handlerInput.requestEnvelope.request.intent.slots.action.value;
-    const location =
-      handlerInput.requestEnvelope.request.intent.slots.location.value;
-    const equipment =
-      handlerInput.requestEnvelope.request.intent.slots.equipment.value;
-    speakOutput = `1st check invalid ${equipment} ${location} ${action} `;
+    const intent = handlerInput.requestEnvelope.request.intent;
+    const action = intent.slots.action.value;
+    const location = intent.slots.location.value;
+    const equipment = intent.slots.equipment.value;
     if (action && location && equipment) {
-      speakOutput = `1st check valid ${equipment} ${location} ${action} `;
+      let outputData = {
+        action,
+        location,
+        equipment,
+      };
+      const response = await postRequest(outputData);
+      if (response.length() > 1) {
+        speakOutput = `Done ${response}`;
+      }
+      speakOutput = `incomplete response ${response}`;
     }
 
     return handlerInput.responseBuilder
