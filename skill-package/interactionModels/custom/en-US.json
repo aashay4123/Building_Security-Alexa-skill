@@ -1,0 +1,210 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "building security",
+      "modelConfiguration": {
+        "fallbackIntentSensitivity": {
+          "level": "LOW"
+        }
+      },
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": ["nop", "no"]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloIntent",
+          "slots": [
+            {
+              "name": "FirstName",
+              "type": "GUEST_NAMES"
+            }
+          ],
+          "samples": [
+            "wish  {FirstName}",
+            "greet our guest {FirstName}",
+            "wish our guest {FirstName}",
+            "say hello to {FirstName}"
+          ]
+        },
+        {
+          "name": "QuoteIntent",
+          "slots": [],
+          "samples": ["quote", "get a quote", "get me a quote"]
+        },
+        {
+          "name": "NextQuoteIntent",
+          "slots": [],
+          "samples": [
+            "please",
+            "yes please",
+            "more",
+            "okay ",
+            "yes",
+            "why not",
+            "one more"
+          ]
+        },
+        {
+          "name": "SmartHomeIntent",
+          "slots": [
+            {
+              "name": "action",
+              "type": "action"
+            },
+            {
+              "name": "location",
+              "type": "location"
+            },
+            {
+              "name": "equipment",
+              "type": "equipment"
+            }
+          ],
+          "samples": [
+            "{action} {location} {equipment}",
+            "turn {action} {location} {equipment}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "GUEST_NAMES",
+          "values": [
+            {
+              "name": {
+                "value": "phoebe"
+              }
+            },
+            {
+              "name": {
+                "value": "penny"
+              }
+            },
+            {
+              "name": {
+                "value": "rachel"
+              }
+            },
+            {
+              "name": {
+                "value": "amy"
+              }
+            },
+            {
+              "name": {
+                "value": "john"
+              }
+            }
+          ]
+        },
+        {
+          "name": "action",
+          "values": [
+            {
+              "name": {
+                "value": "disable"
+              }
+            },
+            {
+              "name": {
+                "value": "enable"
+              }
+            },
+            {
+              "name": {
+                "value": "off"
+              }
+            },
+            {
+              "name": {
+                "value": "on "
+              }
+            }
+          ]
+        },
+        {
+          "name": "location",
+          "values": [
+            {
+              "name": {
+                "value": "living room"
+              }
+            },
+            {
+              "name": {
+                "value": "bathroom"
+              }
+            },
+            {
+              "name": {
+                "value": "kitchen"
+              }
+            },
+            {
+              "name": {
+                "value": "bedroom"
+              }
+            },
+            {
+              "name": {
+                "value": "hall"
+              }
+            }
+          ]
+        },
+        {
+          "name": "equipment",
+          "values": [
+            {
+              "name": {
+                "value": "indirect light"
+              }
+            },
+            {
+              "name": {
+                "value": "tv "
+              }
+            },
+            {
+              "name": {
+                "value": "heater"
+              }
+            },
+            {
+              "name": {
+                "value": "ac"
+              }
+            },
+            {
+              "name": {
+                "value": "light"
+              }
+            },
+            {
+              "name": {
+                "value": "fan"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
