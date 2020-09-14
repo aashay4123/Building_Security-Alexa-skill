@@ -41,7 +41,7 @@ const getQuote = () => {
   return new Promise((resolve, reject) => {
     axios
       .get(url)
-      .then((res) => res)
+      .then((res) => res.data)
       .then((res) => {
         resolve(res.quoteText);
       })
@@ -52,13 +52,13 @@ const getQuote = () => {
 };
 
 const postRequest = (data) => {
-  const url = "http://192.168.169.134:1880/api";
+  const url = "https://httpbin.org/post";
   return new Promise((resolve, reject) => {
     axios
-      .post(url,data)
-      .then((res) => res.data)
+      .post(url, data)
+      .then((res) => res)
       .then((res) => {
-        resolve(res);
+        resolve(res.form);
       })
       .catch((err) => {
         reject("", err);
@@ -164,11 +164,12 @@ const SmartHomeIntentHandler = {
         location,
         equipment,
       };
-    //   const response = await postRequest(outputData);
-    //   if (response.length() > 1) {
-    //     speakOutput = `Done ${response}`;
-    //   }
-      speakOutput = `incomplete response ${outputData.toString()}`;
+      speakOutput = `incomplete response ${response}`;
+      const response = await postRequest(outputData);
+      if (response.length() > 1) {
+        speakOutput = `Done ${response}`;
+      }
+      speakOutput = `incomplete response ${response}`;
     }
 
     return handlerInput.responseBuilder
