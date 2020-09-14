@@ -8,11 +8,11 @@ const LaunchRequestHandler = {
     );
   },
   handle(handlerInput) {
-    const speakOutput = "Welcome to Greeter skill. Whom you want to greet?";
+    const speakOutput = "Welcome. You can say turn on bedroom light";
     const attributes = handlerInput.attributesManager.getSessionAttributes();
     attributes.lastResult = speakOutput;
     handlerInput.attributesManager.setSessionAttributes(attributes);
-    const repromptText = " You can say for example, say hello to john.";
+    const repromptText = " for example, say turn off kitchen fan";
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt(repromptText)
@@ -139,18 +139,20 @@ const SmartHomeIntentHandler = {
   },
   async handle(handlerInput) {
     let speakOutput = "";
-    const attributes = handlerInput.attributesManager.getSessionAttributes();
-    if (attributes.quoteIntent) {
-      const quote = await getQuote();
-      speakOutput += quote + " do you want to hear more?";
-      attributes.lastResult = speakOutput;
-      handlerInput.attributesManager.setSessionAttributes(attributes);
-    } else {
-      speakOutput += "please try again.";
+    const action =
+      handlerInput.requestEnvelope.request.intent.slots.action.value;
+    const location =
+      handlerInput.requestEnvelope.request.intent.slots.location.value;
+    const equipment =
+      handlerInput.requestEnvelope.request.intent.slots.equipment.value;
+    speakOutput = `1st check invalid ${equipment} ${location} ${action} `;
+    if (action && location && equipment) {
+      speakOutput = `1st check valid ${equipment} ${location} ${action} `;
     }
+
     return handlerInput.responseBuilder
       .speak(speakOutput)
-      .reprompt("You can say yes or one more. ")
+      .reprompt("You want to perform any more steps?")
       .getResponse();
   },
 };
