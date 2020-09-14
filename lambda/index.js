@@ -41,7 +41,7 @@ const getQuote = () => {
   return new Promise((resolve, reject) => {
     axios
       .get(url)
-      .then((res) => res.data)
+      .then((res) => res)
       .then((res) => {
         resolve(res.quoteText);
       })
