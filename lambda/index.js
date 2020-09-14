@@ -154,6 +154,7 @@ const SmartHomeIntentHandler = {
   },
   async handle(handlerInput) {
     let speakOutput = "";
+     const attributes = handlerInput.attributesManager.getSessionAttributes();
     const intent = handlerInput.requestEnvelope.request.intent;
     const action = intent.slots.action.value;
     const location = intent.slots.location.value;
@@ -170,7 +171,8 @@ const SmartHomeIntentHandler = {
         speakOutput = `Done ${response}`;
       }
     }
-
+    attributes.outputData = outputData;
+ handlerInput.attributesManager.setSessionAttributes(attributes);
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt("You want to perform any more steps?")
