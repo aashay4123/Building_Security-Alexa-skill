@@ -166,6 +166,7 @@ const SmartHomeIntentHandler = {
         equipment:equipment,
       };
       attributes.outputData = outputData;
+       handlerInput.attributesManager.setSessionAttributes(attributes);
       const response = await postRequest(outputData);
       speakOutput = `incomplete response ${response}`;
       if (response) {
@@ -173,7 +174,7 @@ const SmartHomeIntentHandler = {
       }
     }
     
- handlerInput.attributesManager.setSessionAttributes(attributes);
+
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt("You want to perform any more steps?")
