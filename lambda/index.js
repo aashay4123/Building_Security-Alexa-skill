@@ -56,7 +56,7 @@ const postRequest = (data) => {
   return new Promise((resolve, reject) => {
     axios
       .post(url, data)
-      .then((res) => res)
+      .then((res) => res.data)
       .then((res) => {
         resolve(res);
       })
