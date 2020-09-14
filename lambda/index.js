@@ -167,7 +167,7 @@ const SmartHomeIntentHandler = {
       const response = await postRequest(outputData);
       speakOutput = `incomplete response ${response}`;
       if (response) {
-        speakOutput = `Done ${response}`;
+        speakOutput = `Done ${response.toString()}`;
       }
     }
 
