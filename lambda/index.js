@@ -58,7 +58,7 @@ const postRequest = (data) => {
       .post(url,data)
       .then((res) => res.data)
       .then((res) => {
-        resolve(res.form.outputData);
+        resolve(res.outputData);
       })
       .catch((err) => {
         reject("", err);
