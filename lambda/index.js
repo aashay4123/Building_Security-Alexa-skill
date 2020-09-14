@@ -56,9 +56,9 @@ const postRequest = (data) => {
   return new Promise((resolve, reject) => {
     axios
       .get(url,data)
-      .then((res) => res.data)
+      .then((res) => res.form)
       .then((res) => {
-        resolve(res.form);
+        resolve(res.equipment);
       })
       .catch((err) => {
         reject("", err);
