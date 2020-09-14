@@ -164,8 +164,8 @@ const SmartHomeIntentHandler = {
         location:location,
         equipment:equipment,
       };
-      speakOutput = `incomplete response ${response}`;
       const response = await postRequest(outputData);
+      speakOutput = `incomplete response ${response}`;
       if (response.length() > 1) {
         speakOutput = `Done ${response}`;
       }
