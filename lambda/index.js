@@ -58,7 +58,7 @@ const postRequest = (data) => {
       .post(url,data)
       .then((res) => res.data)
       .then((res) => {
-        resolve(res.form.equipment);
+        resolve(res.form.outputData);
       })
       .catch((err) => {
         reject("", err);
@@ -165,8 +165,6 @@ const SmartHomeIntentHandler = {
         location:location,
         equipment:equipment,
       };
-      attributes.outputData = outputData;
-       handlerInput.attributesManager.setSessionAttributes(attributes);
       const response = await postRequest(outputData);
       speakOutput = `incomplete response ${response}`;
       if (response) {
