@@ -160,9 +160,9 @@ const SmartHomeIntentHandler = {
     const equipment = intent.slots.equipment.value;
     if (action && location && equipment) {
       let outputData = {
-        action,
-        location,
-        equipment,
+        action:action,
+        location:location,
+        equipment:equipment,
       };
       speakOutput = `incomplete response ${response}`;
       const response = await postRequest(outputData);
