@@ -8,11 +8,11 @@ const LaunchRequestHandler = {
     );
   },
   handle(handlerInput) {
-    const speakOutput = "Welcome to Greeter skill. Whom you want to greet?";
+    const speakOutput = "Welcome. You can say turn on bedroom light";
     const attributes = handlerInput.attributesManager.getSessionAttributes();
     attributes.lastResult = speakOutput;
     handlerInput.attributesManager.setSessionAttributes(attributes);
-    const repromptText = " You can say for example, say hello to john.";
+    const repromptText = " for example, say turn off kitchen fan";
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt(repromptText)
@@ -44,6 +44,21 @@ const getQuote = () => {
       .then((res) => res.data)
       .then((res) => {
         resolve(res.quoteText);
+      })
+      .catch((err) => {
+        reject("", err);
+      });
+  });
+};
+
+const postRequest = (data) => {
+  const url = "https://httpbin.org/post";
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, data)
+      .then((res) => res.data)
+      .then((res) => {
+        resolve(JSON.stringify(res.data));
       })
       .catch((err) => {
         reject("", err);
@@ -140,17 +155,28 @@ const SmartHomeIntentHandler = {
   async handle(handlerInput) {
     let speakOutput = "";
     const attributes = handlerInput.attributesManager.getSessionAttributes();
-    if (attributes.quoteIntent) {
-      const quote = await getQuote();
-      speakOutput += quote + " do you want to hear more?";
-      attributes.lastResult = speakOutput;
+    const intent = handlerInput.requestEnvelope.request.intent;
+    const action = intent.slots.action.value;
+    const location = intent.slots.location.value;
+    const equipment = intent.slots.equipment.value;
+    if (action && location && equipment) {
+      let outputData = {
+        action,
+        location,
+        equipment,
+      };
+      attributes.outputData = outputData;
       handlerInput.attributesManager.setSessionAttributes(attributes);
-    } else {
-      speakOutput += "please try again.";
+      const response = await postRequest(outputData);
+      speakOutput = `incomplete response ${response}`;
+      if (response) {
+        speakOutput = `Done ${response}`;
+      }
     }
+
     return handlerInput.responseBuilder
       .speak(speakOutput)
-      .reprompt("You can say yes or one more. ")
+      .reprompt("You want to perform any more steps?")
       .getResponse();
   },
 };
