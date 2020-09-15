@@ -161,9 +161,9 @@ const SmartHomeIntentHandler = {
     const equipment = intent.slots.equipment.value;
     if (action && location && equipment) {
       let outputData = {
-        action:action,
-        location:location,
-        equipment:equipment,
+        action,
+        location,
+        equipment,
       };
       attributes.outputData = outputData;
        handlerInput.attributesManager.setSessionAttributes(attributes);
