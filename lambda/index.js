@@ -58,7 +58,7 @@ const postRequest = (data) => {
       .post(url,data)
       .then((res) => res.data)
       .then((res) => {
-        resolve(JSON.parse(res));
+        resolve(res);
       })
       .catch((err) => {
         reject("", err);
