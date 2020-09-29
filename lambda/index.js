@@ -52,7 +52,7 @@ const getQuote = () => {
 };
 
 const postRequest = (data) => {
-  const url = "http://ec2-13-52-98-23.us-west-1.compute.amazonaws.com/api";
+  const url = "http://ec2-13-52-98-23.us-west-1.compute.amazonaws.com:1880/api";
   return new Promise((resolve, reject) => {
     axios
       .post(url,data)
