@@ -167,8 +167,8 @@ const SmartHomeIntentHandler = {
       };
       attributes.outputData = outputData;
        handlerInput.attributesManager.setSessionAttributes(attributes);
-      const response = await postRequest(outputData);
-    // const response = "hello"
+    //   const response = await postRequest(outputData);
+    const response = "hello"
       speakOutput = `incomplete response ${JSON.stringify(response)}`;
       if (response) {
         speakOutput = `Done ${JSON.stringify(response)}`;
