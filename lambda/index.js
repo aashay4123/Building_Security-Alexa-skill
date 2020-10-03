@@ -52,7 +52,7 @@ const getQuote = () => {
 };
 
 const postRequest = (data) => {
-  const url = "http://ec2-54-177-239-173.us-west-1.compute.amazonaws.com:1880/api";
+  const url = "http://192.168.29.146:1880/api";
   return new Promise((resolve, reject) => {
     axios
       .post(url,data)
@@ -167,8 +167,8 @@ const SmartHomeIntentHandler = {
       };
       attributes.outputData = outputData;
        handlerInput.attributesManager.setSessionAttributes(attributes);
-      const response = await postRequest(outputData);
-    // const response = "hello"
+    //   const response = await postRequest(outputData);
+    const response = "hello"
       speakOutput = `incomplete response ${JSON.stringify(response)}`;
       if (response) {
         speakOutput = `Done ${JSON.stringify(response)}`;
